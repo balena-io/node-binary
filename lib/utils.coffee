@@ -2,6 +2,16 @@ path = require('path')
 _ = require('lodash-contrib')
 _.str = require('underscore.string')
 Download = require('download')
+rimraf = require('rimraf')
+mkdirp = require('mkdirp')
+
+# Wrap rimraf to be able to mock it with sinon
+exports.removeDirectory = (directory, callback) ->
+	return rimraf(directory, callback)
+#
+# Wrap mkdirp to be able to mock it with sinon
+exports.mkdirp = (directory, callback) ->
+	return mkdirp(directory, callback)
 
 exports.stripExtension = (filePath, extension) ->
 
@@ -19,7 +29,10 @@ exports.stripExtension = (filePath, extension) ->
 # The purpose of this function is to be able to stub it
 # on downloadNodePackage() tests.
 exports.downloadAndExtract = (url, dest, callback) ->
-	download = new Download(extract: true)
+	download = new Download({
+		extract: true
+		mode: 755
+	})
 		.get(url)
 		.dest(dest)
 

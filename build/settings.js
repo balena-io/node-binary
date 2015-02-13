@@ -3,7 +3,8 @@ var baseUrl, settings, unixUrl, _;
 _ = require('lodash-contrib');
 
 settings = {
-  packageName: 'node-<%= version %>-<%= os %>-<%= arch %>'
+  packageName: 'node-<%= version %>-<%= os %>-<%= arch %>',
+  tempDirectory: process.env.TEMP || process.env.TMPDIR
 };
 
 baseUrl = 'http://nodejs.org/dist/<%= version %>';

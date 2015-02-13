@@ -5,6 +5,21 @@ node-binary
 [![dependencies](https://david-dm.org/resin-io/node-binary.png)](https://david-dm.org/resin-io/node-binary.png)
 [![Build Status](https://travis-ci.org/resin-io/node-binary.svg?branch=master)](https://travis-ci.org/resin-io/node-binary)
 
+Download node binaries for various platforms and architectures, easily.
+
+```javascript
+var binary = require('node-binary');
+
+binary.download({
+	os: 'darwin',
+	arch: 'x64',
+	version: 'v0.12.0'
+}, '/opt/node', function(error, binaryPath) {
+	if(error) throw error;
+
+	console.log('The node binary for OS X x64 was downloaded to ' + binaryPath);
+});
+```
 
 Installation
 ------------
@@ -18,7 +33,33 @@ $ npm install --save node-binary
 Documentation
 -------------
 
-### binary.download(options, callback)
+### binary.download(Object options, String dest, Function callback)
+
+Download a nodejs binary to a certain location.
+
+#### options
+
+- `os` is the operating system to download node for.
+
+This module curently supports `darwin`, `win32`, `linux` and `sunos`.
+
+- `arch` is the architecture to download node for.
+
+This module curently supports `x64` and `x86`.
+
+- `version` is the node version to download.
+
+It can be a string such as `v0.12.0` or simply `0.12.0`.
+
+#### dest
+
+The directory to download the binary to.
+
+The binary will automatically be renamed to `node-<version>-<os>-<arch>[.exe]`.
+
+#### callback(error, binaryPath)
+
+The callback will be called with a possible error, or with the absolute path to the downloaded binary.
 
 Tests
 -----

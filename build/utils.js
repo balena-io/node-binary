@@ -1,4 +1,4 @@
-var Download, path, _;
+var Download, mkdirp, path, rimraf, _;
 
 path = require('path');
 
@@ -7,6 +7,18 @@ _ = require('lodash-contrib');
 _.str = require('underscore.string');
 
 Download = require('download');
+
+rimraf = require('rimraf');
+
+mkdirp = require('mkdirp');
+
+exports.removeDirectory = function(directory, callback) {
+  return rimraf(directory, callback);
+};
+
+exports.mkdirp = function(directory, callback) {
+  return mkdirp(directory, callback);
+};
 
 exports.stripExtension = function(filePath, extension) {
   if (filePath == null) {
@@ -24,7 +36,8 @@ exports.stripExtension = function(filePath, extension) {
 exports.downloadAndExtract = function(url, dest, callback) {
   var download;
   download = new Download({
-    extract: true
+    extract: true,
+    mode: 755
   }).get(url).dest(dest);
   return download.run(_.unary(callback));
 };
