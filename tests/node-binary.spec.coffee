@@ -1,3 +1,4 @@
+path = require('path')
 sinon = require('sinon')
 _ = require('lodash-contrib')
 chai = require('chai')
@@ -42,8 +43,8 @@ describe 'Node Binary:', ->
 				os: 'win32'
 				version: 'v0.12.0'
 
-			@tempFile = '/tmp/node.exe'
-			@destFile = '/dest/node-v0.12.0-win32-x64.exe'
+			@tempFile = path.join('tmp', 'node.exe')
+			@destFile = path.join('dest', 'node-v0.12.0-win32-x64.exe')
 
 			@utilsDownloadNodePackageStub = sinon.stub(utils, 'downloadNodePackage')
 			@utilsDownloadNodePackageStub.yields(null, @tempFile)
@@ -64,10 +65,10 @@ describe 'Node Binary:', ->
 			@utilsMkdirp.restore()
 
 		it 'should complete the download in the correct place', (done) ->
-			binary.download @node, '/dest', (error, binaryFile) =>
+			binary.download @node, 'dest', (error, binaryFile) =>
 				expect(error).to.not.exist
 				expect(binaryFile).to.equal(@destFile)
-				expect(@utilsMkdirp).to.have.been.calledWith('/dest')
+				expect(@utilsMkdirp).to.have.been.calledWith('dest')
 				expect(@fsRenameStub).to.have.been.calledWith(@tempFile, @destFile)
 				expect(@utilsRemoveDirectory).to.have.been.calledWith(@tempFile)
 				done()
@@ -82,8 +83,8 @@ describe 'Node Binary:', ->
 				os: 'darwin'
 				version: 'v0.12.0'
 
-			@tempFile = '/tmp/node-v0.12.0-darwin-x64'
-			@destFile = '/dest/node-v0.12.0-darwin-x64'
+			@tempFile = path.join('tmp', 'node-v0.12.0-darwin-x64')
+			@destFile = path.join('dest', 'node-v0.12.0-darwin-x64')
 
 			@utilsDownloadNodePackageStub = sinon.stub(utils, 'downloadNodePackage')
 			@utilsDownloadNodePackageStub.yields(null, @tempFile)
@@ -104,11 +105,12 @@ describe 'Node Binary:', ->
 			@utilsMkdirp.restore()
 
 		it 'should complete the download in the correct place', (done) ->
-			binary.download @node, '/dest', (error, binaryFile) =>
+			binary.download @node, 'dest', (error, binaryFile) =>
 				expect(error).to.not.exist
 				expect(binaryFile).to.equal(@destFile)
-				expect(@utilsMkdirp).to.have.been.calledWith('/dest')
-				expect(@fsRenameStub).to.have.been.calledWith(@tempFile + '/bin/node', @destFile)
+				expect(@utilsMkdirp).to.have.been.calledWith('dest')
+				binPath = path.join(@tempFile, 'bin', 'node')
+				expect(@fsRenameStub).to.have.been.calledWith(binPath, @destFile)
 				expect(@utilsRemoveDirectory).to.have.been.calledWith(@tempFile)
 				done()
 
@@ -122,8 +124,8 @@ describe 'Node Binary:', ->
 				os: 'linux'
 				version: 'v0.12.0'
 
-			@tempFile = '/tmp/node-v0.12.0-linux-x64'
-			@destFile = '/dest/node-v0.12.0-linux-x64'
+			@tempFile = path.join('tmp', 'node-v0.12.0-linux-x64')
+			@destFile = path.join('dest', 'node-v0.12.0-linux-x64')
 
 			@utilsDownloadNodePackageStub = sinon.stub(utils, 'downloadNodePackage')
 			@utilsDownloadNodePackageStub.yields(null, @tempFile)
@@ -144,11 +146,12 @@ describe 'Node Binary:', ->
 			@utilsMkdirp.restore()
 
 		it 'should complete the download in the correct place', (done) ->
-			binary.download @node, '/dest', (error, binaryFile) =>
+			binary.download @node, 'dest', (error, binaryFile) =>
 				expect(error).to.not.exist
 				expect(binaryFile).to.equal(@destFile)
-				expect(@utilsMkdirp).to.have.been.calledWith('/dest')
-				expect(@fsRenameStub).to.have.been.calledWith(@tempFile + '/bin/node', @destFile)
+				expect(@utilsMkdirp).to.have.been.calledWith('dest')
+				binPath = path.join(@tempFile, 'bin', 'node')
+				expect(@fsRenameStub).to.have.been.calledWith(binPath, @destFile)
 				expect(@utilsRemoveDirectory).to.have.been.calledWith(@tempFile)
 				done()
 
@@ -162,8 +165,8 @@ describe 'Node Binary:', ->
 				os: 'sunos'
 				version: 'v0.12.0'
 
-			@tempFile = '/tmp/node-v0.12.0-sunos-x64'
-			@destFile = '/dest/node-v0.12.0-sunos-x64'
+			@tempFile = path.join('tmp', 'node-v0.12.0-sunos-x64')
+			@destFile = path.join('dest', 'node-v0.12.0-sunos-x64')
 
 			@utilsDownloadNodePackageStub = sinon.stub(utils, 'downloadNodePackage')
 			@utilsDownloadNodePackageStub.yields(null, @tempFile)
@@ -184,10 +187,11 @@ describe 'Node Binary:', ->
 			@utilsMkdirp.restore()
 
 		it 'should complete the download in the correct place', (done) ->
-			binary.download @node, '/dest', (error, binaryFile) =>
+			binary.download @node, 'dest', (error, binaryFile) =>
 				expect(error).to.not.exist
 				expect(binaryFile).to.equal(@destFile)
-				expect(@utilsMkdirp).to.have.been.calledWith('/dest')
-				expect(@fsRenameStub).to.have.been.calledWith(@tempFile + '/bin/node', @destFile)
+				expect(@utilsMkdirp).to.have.been.calledWith('dest')
+				binPath = path.join(@tempFile, 'bin', 'node')
+				expect(@fsRenameStub).to.have.been.calledWith(binPath, @destFile)
 				expect(@utilsRemoveDirectory).to.have.been.calledWith(@tempFile)
 				done()
