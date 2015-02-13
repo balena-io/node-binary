@@ -30,6 +30,21 @@ Install `node-binary` by running:
 $ npm install --save node-binary
 ```
 
+CLI
+---
+
+`node-binary` provides a CLI version as well. Install it by running:
+
+```sh
+$ npm install -g node-binary
+```
+
+You can now download node binaries like this:
+
+```sh
+$ node-binary download v0.12.0 ~/Downloads --arch x64 --os darwin
+```
+
 Documentation
 -------------
 
