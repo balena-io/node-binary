@@ -14,7 +14,7 @@ capitano.command
 			signature: 'os'
 			parameter: 'os'
 			description: 'os'
-			alias: 's'
+			alias: 'o'
 			required: 'You have to specify an os'
 		}
 		{
