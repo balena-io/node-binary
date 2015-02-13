@@ -30,7 +30,7 @@ capitano.command({
     }
   ],
   action: function(params, options, done) {
-    console.info('Downloading node...');
+    console.info("Downloading node-" + params.version + "-" + options.os + "-" + options.arch + " to " + params.output);
     return binary.download({
       os: options.os,
       arch: options.arch,

@@ -26,7 +26,7 @@ capitano.command
 		}
 	]
 	action: (params, options, done) ->
-		console.info('Downloading node...')
+		console.info("Downloading node-#{params.version}-#{options.os}-#{options.arch} to #{params.output}")
 		binary.download
 			os: options.os
 			arch: options.arch
