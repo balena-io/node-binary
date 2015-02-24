@@ -29,9 +29,11 @@ exports.stripExtension = (filePath, extension) ->
 # The purpose of this function is to be able to stub it
 # on downloadNodePackage() tests.
 exports.downloadAndExtract = (url, dest, callback) ->
-	download = new Download(extract: true)
-		.get(url)
-		.dest(dest)
+	download = new Download
+		extract: true
+		mode: '755'
+	.get(url)
+	.dest(dest)
 
 	download.run(_.unary(callback))
 
