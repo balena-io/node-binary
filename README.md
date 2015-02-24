@@ -103,6 +103,13 @@ Before submitting a PR, please make sure that you include tests, and that [coffe
 $ gulp lint
 ```
 
+ChangeLog
+---------
+
+### v1.0.1
+
+Set mode to 755 for the downloaded binary.
+
 Support
 -------
 

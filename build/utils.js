@@ -36,7 +36,8 @@ exports.stripExtension = function(filePath, extension) {
 exports.downloadAndExtract = function(url, dest, callback) {
   var download;
   download = new Download({
-    extract: true
+    extract: true,
+    mode: '755'
   }).get(url).dest(dest);
   return download.run(_.unary(callback));
 };
