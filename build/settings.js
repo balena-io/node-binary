@@ -4,7 +4,7 @@ _ = require('lodash-contrib');
 
 settings = {
   packageName: 'node-<%= version %>-<%= os %>-<%= arch %>',
-  tempDirectory: process.env.TEMP || process.env.TMPDIR
+  tempDirectory: process.env.TEMP || process.env.TMPDIR || process.env.TMP || '/tmp'
 };
 
 baseUrl = 'http://nodejs.org/dist/<%= version %>';

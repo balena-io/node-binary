@@ -4,7 +4,7 @@ settings =
 
 	packageName: 'node-<%= version %>-<%= os %>-<%= arch %>'
 
-	tempDirectory: process.env.TEMP or process.env.TMPDIR
+	tempDirectory: process.env.TEMP or process.env.TMPDIR or process.env.TMP or '/tmp'
 
 baseUrl = 'http://nodejs.org/dist/<%= version %>'
 unixUrl = "#{baseUrl}/node-<%= version %>-<%= os %>-<%= arch %>.tar.gz"
