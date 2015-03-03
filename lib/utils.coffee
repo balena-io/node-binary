@@ -38,6 +38,13 @@ exports.downloadAndExtract = (url, dest, callback) ->
 	download.run(_.unary(callback))
 
 exports.downloadNodePackage = (node, dest, callback) ->
+
+	if not dest?
+		throw new Error('Missing dest argument')
+
+	if not _.isString(dest)
+		throw new Error("Invalid dest argument: should be a string: #{dest}")
+
 	exports.downloadAndExtract node.getDownloadUrl(), dest, (error) ->
 		return callback(error) if error?
 

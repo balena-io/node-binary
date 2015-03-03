@@ -1,3 +1,4 @@
+_ = require('lodash-contrib')
 sinon = require('sinon')
 chai = require('chai')
 chai.use(require('sinon-chai'))
@@ -28,6 +29,26 @@ describe 'Utils:', ->
 				expect(utils.getBinaryPath(@nodePackage)).to.equal(@nodePackage)
 
 	describe '.downloadNodePackage()', ->
+
+		it 'should throw an error if dest is missing', ->
+			node = new Node
+				arch: 'x64'
+				os: 'darwin'
+				version: 'v0.12.0'
+
+			expect ->
+				utils.downloadNodePackage(node, null, _.noop)
+			.to.throw('Missing dest argument')
+
+		it 'should throw an error if dest is not a string', ->
+			node = new Node
+				arch: 'x64'
+				os: 'darwin'
+				version: 'v0.12.0'
+
+			expect ->
+				utils.downloadNodePackage(node, [ '/dest' ], _.noop)
+			.to.throw('Invalid dest argument: should be a string: /dest')
 
 		describe 'given an error', ->
 

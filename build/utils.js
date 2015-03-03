@@ -43,6 +43,12 @@ exports.downloadAndExtract = function(url, dest, callback) {
 };
 
 exports.downloadNodePackage = function(node, dest, callback) {
+  if (dest == null) {
+    throw new Error('Missing dest argument');
+  }
+  if (!_.isString(dest)) {
+    throw new Error("Invalid dest argument: should be a string: " + dest);
+  }
   return exports.downloadAndExtract(node.getDownloadUrl(), dest, function(error) {
     var output;
     if (error != null) {
