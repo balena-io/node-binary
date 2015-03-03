@@ -106,6 +106,11 @@ $ gulp lint
 ChangeLog
 ---------
 
+### v1.1.0
+
+- Improve error messages.
+- Prevent temporary directory from being undefined.
+
 ### v1.0.1
 
 Set mode to 755 for the downloaded binary.
