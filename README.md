@@ -89,7 +89,6 @@ TODO
 ----
 
 - [  ] Implement a way to get the state of the download, to make use of a progress bar, etc.
-- [  ] Add executable mode to resulting binaries on UNIX. 
 
 Contribute
 ----------
