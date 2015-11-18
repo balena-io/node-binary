@@ -7,6 +7,8 @@ node-binary
 
 Download node binaries for various platforms and architectures, easily.
 
+**THIS MODULE IS DEPRECATED AND IT'S NOT BEING MAINTAINED ANYMORE**
+
 ```javascript
 var binary = require('node-binary');
 
